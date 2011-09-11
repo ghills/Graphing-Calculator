@@ -19,7 +19,6 @@
 		9B0EEE9613F245BB00E3166D /* CalculatorViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B0EEE9413F245BB00E3166D /* CalculatorViewController.m */; };
 		9B0EEE9813F245C900E3166D /* CalculatorViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9B0EEE9713F245C900E3166D /* CalculatorViewController.xib */; };
 		9B0EEE9C13FB7B8800E3166D /* GraphViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B0EEE9A13FB7B8700E3166D /* GraphViewController.m */; };
-		9B0EEE9D13FB7B8800E3166D /* GraphViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9B0EEE9B13FB7B8800E3166D /* GraphViewController.xib */; };
 		9B0EEEA013FB7EB600E3166D /* GraphView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B0EEE9F13FB7EB600E3166D /* GraphView.m */; };
 /* End PBXBuildFile section */
 
@@ -44,7 +43,6 @@
 		9B0EEE9713F245C900E3166D /* CalculatorViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CalculatorViewController.xib; sourceTree = "<group>"; };
 		9B0EEE9913FB7B8700E3166D /* GraphViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GraphViewController.h; sourceTree = "<group>"; };
 		9B0EEE9A13FB7B8700E3166D /* GraphViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GraphViewController.m; sourceTree = "<group>"; };
-		9B0EEE9B13FB7B8800E3166D /* GraphViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GraphViewController.xib; sourceTree = "<group>"; };
 		9B0EEE9E13FB7EB600E3166D /* GraphView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GraphView.h; sourceTree = "<group>"; };
 		9B0EEE9F13FB7EB600E3166D /* GraphView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GraphView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -105,7 +103,6 @@
 				9B0EEE9713F245C900E3166D /* CalculatorViewController.xib */,
 				9B0EEE9913FB7B8700E3166D /* GraphViewController.h */,
 				9B0EEE9A13FB7B8700E3166D /* GraphViewController.m */,
-				9B0EEE9B13FB7B8800E3166D /* GraphViewController.xib */,
 				9B0EEE9E13FB7EB600E3166D /* GraphView.h */,
 				9B0EEE9F13FB7EB600E3166D /* GraphView.m */,
 				9B0EEE7B13F2456F00E3166D /* Supporting Files */,
@@ -174,7 +171,6 @@
 				9B0EEE7F13F2456F00E3166D /* InfoPlist.strings in Resources */,
 				9B0EEE8813F2456F00E3166D /* MainWindow.xib in Resources */,
 				9B0EEE9813F245C900E3166D /* CalculatorViewController.xib in Resources */,
-				9B0EEE9D13FB7B8800E3166D /* GraphViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -301,6 +297,7 @@
 				9B0EEE8D13F2456F00E3166D /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

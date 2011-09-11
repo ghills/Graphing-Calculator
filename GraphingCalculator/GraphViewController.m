@@ -63,6 +63,30 @@
     [graphView setNeedsDisplay];
 }
 
+- (void)loadView
+{
+    GraphView *gv = [[GraphView alloc] initWithFrame:CGRectZero];
+    gv.backgroundColor = [UIColor whiteColor];
+    self.view = gv;
+    self.graphView = gv;
+    
+    // make gesture listener
+    UIGestureRecognizer *pinchgr = [[UIPinchGestureRecognizer alloc] initWithTarget:gv action:@selector(pinch:)];
+    [gv addGestureRecognizer:pinchgr];
+    [pinchgr release];
+    
+    //
+    UIGestureRecognizer *pangr = [[UIPanGestureRecognizer alloc] initWithTarget:gv action:@selector(pan:)];
+    [gv addGestureRecognizer:pangr];
+    [pangr release];
+    
+    //
+    UITapGestureRecognizer *tapgr = [[UITapGestureRecognizer alloc] initWithTarget:gv action:@selector(tap:)];
+    tapgr.numberOfTapsRequired = 2;
+    [gv addGestureRecognizer:tapgr];
+    [tapgr release];
+}
+
 - (double)solveForValue:(double)value
 {
     // the dictionary will have only 1 item, "x" => x value
@@ -91,6 +115,7 @@
 - (void)dealloc
 {
     [expression release];
+    [graphView release];
     [super dealloc];
 }
 
