@@ -14,21 +14,33 @@
 @synthesize delegate;
 @synthesize scale;
 
+#define DEFAULT_SCALE 5
+
+- (void)setup
+{
+    self.contentMode = UIViewContentModeRedraw;
+    self.scale = DEFAULT_SCALE;
+    self.origin = CGPointZero;
+}
+
 - (id)initWithFrame:(CGRect)frame
 {
     self = [super initWithFrame:frame];
     if (self) {
-        //
+        [self setup]; 
     }
     return self;
+}
+
+- (void)awakeFromNib
+{
+    [self setup];
 }
 
 + (BOOL)scaleIsValid:(CGFloat)aScale
 {
     return ((aScale > 0) && (aScale <= 100));
 }
-
-#define DEFAULT_SCALE 5
 
 - (CGFloat)scale
 {
@@ -44,11 +56,6 @@
     }
 }
 
-- (CGPoint)getBoundsMidpoint
-{
-    return CGPointMake(self.bounds.origin.x + ( self.bounds.size.width / 2 ), self.bounds.origin.y + ( self.bounds.size.height / 2 ) );
-}
-
 - (CGPoint)origin
 {
     return origin;
@@ -60,15 +67,22 @@
     [self setNeedsDisplay];
 }
 
+- (CGPoint)getOriginInBounds
+{
+    return CGPointMake(self.bounds.origin.x + ( self.bounds.size.width / 2 ) + self.origin.x, self.bounds.origin.y + ( self.bounds.size.height / 2 ) + self.origin.y );
+}
+
 // Only override drawRect: if you perform custom drawing.
 // An empty implementation adversely affects performance during animation.
 - (void)drawRect:(CGRect)rect
 {
     CGContextRef context = UIGraphicsGetCurrentContext();
     
+    CGPoint graphOrigin = [self getOriginInBounds];
+    
     // Axes should be blue
     [[UIColor blueColor] setStroke];
-    [AxesDrawer drawAxesInRect:self.bounds originAtPoint:self.origin scale:self.scale];
+    [AxesDrawer drawAxesInRect:self.bounds originAtPoint:graphOrigin scale:self.scale];
     
     // calculate some values for drawing
     CGFloat pixelWidth = (self.bounds.size.width * [self contentScaleFactor]);
@@ -80,26 +94,18 @@
     for (int i = 0; i < pixelWidth; i++) 
     {
         // determine x value
-        double xValue = ( ( i - (self.origin.x * [self contentScaleFactor] ) ) / [self contentScaleFactor] ) / self.scale;
+        double xValue = ( ( i - (graphOrigin.x * [self contentScaleFactor] ) ) / [self contentScaleFactor] ) / self.scale;
         
         // solve for the y value from the x value
         double yValue = [self.delegate solveForValue:xValue];
         
         // determine y pixel
-        CGFloat yPixel = ( self.origin.y * [self contentScaleFactor] ) + ( yValue * self.scale * [self contentScaleFactor]);
+        CGFloat yPixel = ( graphOrigin.y * [self contentScaleFactor] ) - ( yValue * self.scale * [self contentScaleFactor]);
         
         // next point!
-        CGPoint drawPt;
-        drawPt.x = i / [self contentScaleFactor];
-        drawPt.y = yPixel / [self contentScaleFactor];
-        if( i == 0 )
-        {
-            CGContextMoveToPoint(context, drawPt.x, drawPt.y);
-        } 
-        else 
-        {
-            CGContextAddLineToPoint(context, drawPt.x, drawPt.y);
-        }
+        CGPoint drawPt = CGPointMake(i / [self contentScaleFactor], yPixel / [self contentScaleFactor]);
+        if( i == 0 ) CGContextMoveToPoint(context, drawPt.x, drawPt.y);
+        else CGContextAddLineToPoint(context, drawPt.x, drawPt.y);
     }
     
     // draw the plotted data path in red
@@ -133,7 +139,7 @@
 {
     if( gesture.state == UIGestureRecognizerStateEnded )
     {
-        self.origin = [self getBoundsMidpoint];
+        self.origin = CGPointZero;
     }
 }
 
