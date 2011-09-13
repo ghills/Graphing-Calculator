@@ -1789,9 +1789,9 @@
 				</dict>
 			</array>
 		</dict>
-		<real>337581774.352108</real>
-		<string>{262, 1095}</string>
-		<string>{835, 0}</string>
+		<real>337582495.15057999</real>
+		<string>{2728, 1180}</string>
+		<string>{3533, 0}</string>
 		<dict>
 			<key>$class</key>
 			<dict>
@@ -3147,7 +3147,7 @@
 				<integer>273</integer>
 			</dict>
 			<key>NS.time</key>
-			<real>337581716.47908098</real>
+			<real>337582462.050147</real>
 		</dict>
 		<dict>
 			<key>$classes</key>
@@ -3158,7 +3158,7 @@
 			<key>$classname</key>
 			<string>NSDate</string>
 		</dict>
-		<string>Today at 9:41 PM</string>
+		<string>Today at 9:54 PM</string>
 		<integer>234</integer>
 		<dict>
 			<key>$class</key>
@@ -4767,10 +4767,10 @@
 				</dict>
 			</array>
 		</dict>
-		<real>337581774.35300899</real>
-		<string>{262, 1095}</string>
-		<string>{835, 0}</string>
-		<string>-viewDidLoad</string>
+		<real>337582495.15193301</real>
+		<string>{2728, 1180}</string>
+		<string>{3533, 0}</string>
+		<string>-contentSizeForViewInPopover</string>
 		<string>Xcode.IDEKit.EditorDocument.SourceCode</string>
 		<dict>
 			<key>$class</key>
@@ -5069,7 +5069,7 @@
 				</dict>
 				<dict>
 					<key>CF$UID</key>
-					<integer>449</integer>
+					<integer>447</integer>
 				</dict>
 				<dict>
 					<key>CF$UID</key>

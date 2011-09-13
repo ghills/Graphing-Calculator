@@ -36,8 +36,6 @@
 - (void)viewDidLoad
 {
     self.title = @"Calculator";
-    
-    self.contentSizeForViewInPopover = CGSizeMake(320.0, 460.0);
 }
 
 - (IBAction)decimalPointPressed:(UIButton *)sender
@@ -122,6 +120,21 @@
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation
 {
     return YES;
+}
+
+- (CGSize)contentSizeForViewInPopover
+{
+#define OUTER_MARGIN 10.0;
+    
+    CGRect unionRect = CGRectZero;
+    
+    for (UIView *v in self.view.subviews) {
+        unionRect = CGRectUnion(unionRect, v.frame);
+    }
+    
+    unionRect.size.width += OUTER_MARGIN;
+    unionRect.size.height += OUTER_MARGIN;
+    return unionRect.size;
 }
 
 - (void)dealloc
