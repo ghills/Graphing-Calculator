@@ -24,9 +24,20 @@
     return brain;
 }
 
+- (GraphViewController *)graphViewController
+{
+    if(!graphViewController)
+    {
+        graphViewController = [[GraphViewController alloc] init];
+    }
+    return graphViewController;
+}
+
 - (void)viewDidLoad
 {
     self.title = @"Calculator";
+    
+    self.contentSizeForViewInPopover = CGSizeMake(320.0, 460.0);
 }
 
 - (IBAction)decimalPointPressed:(UIButton *)sender
@@ -99,20 +110,24 @@
 
 - (IBAction)graphPressed:(UIButton *)sender
 {
-    GraphViewController *graphController = [[GraphViewController alloc] init];
-    
     // set the model for the graph view (the expression to be evaluated)
-    graphController.expression = self.brain.expression;
+    self.graphViewController.expression = self.brain.expression;
     
-    [self.navigationController pushViewController:graphController animated:YES];
-    
-    // release the graph view because it is owned by the navigation controller now
-    [graphController release];
+    if (!self.graphViewController.view.window)
+    {
+        [self.navigationController pushViewController:self.graphViewController animated:YES];
+    }
+}
+
+- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation
+{
+    return YES;
 }
 
 - (void)dealloc
 {
     [brain release];
+    [graphViewController release];
     [super dealloc];
 }
 

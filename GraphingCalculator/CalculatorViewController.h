@@ -8,13 +8,17 @@
 
 #import <UIKit/UIKit.h>
 #import "CalculatorBrain.h"
+#import "GraphViewController.h"
 
 @interface CalculatorViewController : UIViewController
 {
     IBOutlet UILabel *display;
     CalculatorBrain *brain;
     BOOL userIsInTheMiddleOfTypingANumber;
+    GraphViewController *graphViewController;
 }
+
+@property (readonly) GraphViewController *graphViewController;
 
 - (IBAction)decimalPointPressed:(UIButton *)sender;
 - (IBAction)digitPressed:(UIButton *)sender;

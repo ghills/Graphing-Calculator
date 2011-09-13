@@ -10,6 +10,8 @@
 
 @interface GraphingCalculatorAppDelegate : NSObject <UIApplicationDelegate>
 
+@property (readonly) BOOL iPad;
+
 @property (nonatomic, retain) IBOutlet UIWindow *window;
 
 @end

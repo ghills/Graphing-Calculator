@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "GraphView.h"
 
-@interface GraphViewController : UIViewController <GraphViewDelegate>
+@interface GraphViewController : UIViewController <GraphViewDelegate, UISplitViewControllerDelegate>
 {
     GraphView *graphView;
     id expression;

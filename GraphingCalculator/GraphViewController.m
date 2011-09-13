@@ -30,6 +30,8 @@
     
     // set the view title to the expression
     self.title = [CalculatorBrain descriptionOfExpression:self.expression];
+    
+    [self.view setNeedsDisplay];
 }
 
 - (id)expression
@@ -110,6 +112,28 @@
     // zoom out means less points per unit
     self.graphView.scale /= 2;
     [graphView setNeedsDisplay];
+}
+
+#pragma mark - UISplitViewControllerDelegate
+
+// Called when a button should be added to a toolbar for a hidden view controller
+- (void)splitViewController: (UISplitViewController*)svc willHideViewController:(UIViewController *)aViewController withBarButtonItem:(UIBarButtonItem*)barButtonItem forPopoverController: (UIPopoverController*)pc
+{
+    barButtonItem.title = aViewController.title;
+    self.navigationItem.rightBarButtonItem = barButtonItem;
+}
+
+// Called when the view is shown again in the split view, invalidating the button and popover controller
+- (void)splitViewController: (UISplitViewController*)svc willShowViewController:(UIViewController *)aViewController invalidatingBarButtonItem:(UIBarButtonItem *)barButtonItem
+{
+    self.navigationItem.rightBarButtonItem = nil;
+}
+
+#pragma end
+
+- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation
+{
+    return YES;
 }
 
 - (void)dealloc

@@ -13,15 +13,36 @@
 
 @synthesize window = _window;
 
+- (BOOL) iPad
+{
+    return (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad);
+}
+
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     // Override point for customization after application launch.
     UINavigationController *navcon = [[UINavigationController alloc] init];
     CalculatorViewController *calculatorController = [[CalculatorViewController alloc] init];
     [navcon pushViewController:calculatorController animated:NO];
+    
+    if( self.iPad )
+    {
+        UISplitViewController *svc = [[UISplitViewController alloc] init];
+        UINavigationController *rightNav = [[UINavigationController alloc] init];
+        [rightNav pushViewController:calculatorController.graphViewController animated:NO];
+        svc.delegate = calculatorController.graphViewController;
+        svc.viewControllers = [NSArray arrayWithObjects:navcon, rightNav, nil];
+        [navcon release];
+        [rightNav release];
+        [self.window addSubview:svc.view];
+    } 
+    else 
+    {
+        [self.window addSubview:navcon.view];
+    }
+    
     [calculatorController release];
     
-    [self.window addSubview:navcon.view];
     [self.window makeKeyAndVisible];
     return YES;
 }
