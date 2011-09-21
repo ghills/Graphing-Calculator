@@ -9,6 +9,9 @@
 #import "GraphViewController.h"
 #import "CalculatorBrain.h"
 
+#define KEY_SCALE @"user_scale"
+#define KEY_ORIGIN @"user_origin"
+
 @implementation GraphViewController
 
 @synthesize graphView;
@@ -58,11 +61,32 @@
     
     // reasonable initial scale factor
     self.graphView.scale = 10.0;
+    self.graphView.origin = CGPointZero;
+    
+    // get user defaults
+    self.graphView.scale = [[NSUserDefaults standardUserDefaults] floatForKey:KEY_SCALE];
+    
+    id val_id = [[NSUserDefaults standardUserDefaults] valueForKey:KEY_ORIGIN];
+    if( [val_id isMemberOfClass:[NSValue class]] )
+    {
+        NSValue * val = (NSValue *)val_id;
+        self.graphView.origin = [ val CGPointValue ];
+    }
     
     // the title should be set by the expression - but set default
     self.title = @"Graph";
     
     [graphView setNeedsDisplay];
+}
+
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    
+    // save user settings
+    [[NSUserDefaults standardUserDefaults] setFloat:self.graphView.scale forKey:KEY_SCALE ];
+    [[NSUserDefaults standardUserDefaults] setValue:[NSValue valueWithCGPoint:self.graphView.origin] forUndefinedKey:KEY_ORIGIN];
+    
 }
 
 - (void)loadView
